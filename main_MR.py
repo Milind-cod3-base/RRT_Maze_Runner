@@ -85,7 +85,7 @@ def p2p_dist(p1,p2):
 # to get the text on the button
 def clickText():
     font = pygame.font.Font('arial.ttf', 12)
-    text = font.render('CLICK HERE', antialias= True, color= WHITE)
+    text = font.render('CLICK HERE', True, WHITE)
     textRect = text.get_rect()
     textRect.center = (75, 495)
     screen.blit(text, textRect)
@@ -94,7 +94,7 @@ def clickText():
 def desText(s, x=315, y=485):
     pygame.draw.rect(screen, WHITE, (125, 470, 500, 30))
     font = pygame.font.SysFont('segoeuisemilight', 15)
-    text = font.render(text='%s'%(s), antialias= True, color= BLACK )
+    text = font.render('%s'%(s), True, BLACK )
     textRect = text.get_rect()
     textRect.center = (x,y)
     screen.blit(source= text, dest= textRect)
