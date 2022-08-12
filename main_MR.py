@@ -1,7 +1,10 @@
 # importing important libraries
+from trace import Trace
 import pygame 
 import time
 from random import randint
+
+import RRT_algo
 
 pygame.init()   # Initialize all imported pygame modules
 
@@ -186,5 +189,47 @@ while running:
     # update the display
     pygame.display.update()
 
+# running the game for the algorithm
+running = True
+parent[Start] = (-1, -1)
+Trace = []
+Timer = time.time()
 
+while running:
+    for event in pygame.event.get():
+        # to quit the game
+        if event.type == pygame.QUIT:
+            running = False
+            break
+
+    # gettin the cordinates of the random points
+    x,y = random_point() 
+    
+    if (time.time() - Timer) > 5:
+        Step = 5
+    
+    # calling module RRT_algo
+    good, x_m, y_m, ans= RRT_algo.rrt(x,y,parent)
+
+
+    if good and ans:
+        x_cur = ans[0]
+        y_cur = ans[1]
+
+        # 255 value of alpha is fully opaque
+        if screen.get_at((x_cur, y_cur)) != (0, 0, 0, 255 ) and (x_cur, y_cur) not in parent:
+            parent[(x_cur, y_cur)] = (x_m, y_m)
+
+            # tracing the path
+            if screen.get_at((x_cur, y_cur)) == (0, 255, 0, 255):
+                Trace = (x_cur, y_cur)
+
+                # kill the running
+                running = False
+
+            # draw the other possible routes
+            pygame.draw.line(screen, BLUE, (x_cur, y_cur), (x_m, y_m), 2)
+
+    # update the display
+    pygame.display.update()
 
