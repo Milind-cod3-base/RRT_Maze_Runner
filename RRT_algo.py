@@ -6,7 +6,7 @@ This module will be imported in main_MR.py
 """
 
 # importing main modules screen object
-from main_MR import p2p_dist, screen
+from main_MR import p2p_dist, screen, Step
 
 
 # setting parameter
