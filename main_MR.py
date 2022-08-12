@@ -75,13 +75,7 @@ def point_inside_rec(xr, yr, wr, hr, x, y):
 
     return(False)
 
-# using Euclidean distance formula to get point to point distance
-def p2p_dist(p1,p2):
 
-    x1,y1 = p1 # getting x and y coordinates
-    x2,y2 = p2
-    
-    return( ( (x1 - x2)**2 + (y1 - y2)**2 )**0.5 )
 
 # to get the text on the button
 def clickText():
@@ -180,7 +174,7 @@ while running:
             elif level ==1:
                 if point_inside_game(x,y):
                     OBS[(x,y)] =1 
-                    pygame.draw.circle( screen,  RED, (x,y), 10)
+                    pygame.draw.circle( screen,  BLACK, (x,y), 10)
             
             # make the starting point
             elif level == 2 and Start==[]:
