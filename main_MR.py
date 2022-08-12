@@ -75,12 +75,14 @@ def point_inside_rec(xr, yr, wr, hr, x, y):
 
     return(False)
 
+# variable to hold the text on the button
+button_txt = 'MARK THE START POINT'
 
 
 # to get the text on the button
 def clickText():
     font = pygame.font.Font('arial.ttf', 12)
-    text = font.render('CLICK HERE', True, WHITE)
+    text = font.render(button_txt, True, WHITE)
     textRect = text.get_rect()
     textRect.center = (300, 30)
     screen.blit(text, textRect)
@@ -142,15 +144,16 @@ while running:
                 """    
                 if level ==1 and Start == []:
                     level +=1
-                    
+                    button_txt = 'MARK THE END POINT'
 
                 elif level ==2 and Start:
                     level +=1
+                    button_txt = 'FIND THE PATH'
                    
                 
                 elif level ==3 and End!=set():
                     level +=1
-                    
+                    button_txt = 'PATH FOUND'
 
                 B1.create(screen)
                 clickText()
