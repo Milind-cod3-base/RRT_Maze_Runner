@@ -54,3 +54,9 @@ def point_inside_game(x, y):
 
     return (False)
 
+# to generate and return random point coordinates in (x,y)
+def random_point():
+    x_random = randint(gameX + gameBorder, gameX + gameWidth - gameBorder - 1)
+    y_random = randint(gameY + gameBorder, gameY + gameHeight - gameBorder - 1)
+
+    return (x_random, y_random)
