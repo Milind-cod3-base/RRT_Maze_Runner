@@ -11,7 +11,7 @@ BLUE = (0,0,255)
 BLACK = (0,0,0)
 RED = (255,0,0)
 GREEN = (0,255,0)
-color_custom_1 = (10,145,80)  # creating a custom color
+colour_custom_1 = (10,145,80)  # creating a custom color
 
 # setting game parameters
 screen = pygame.display.set_mode([500,500]) # gives a surface
@@ -25,4 +25,20 @@ gameBorder = 3    # window border width
 screen.fill(WHITE)
 
 INT_MAX = 100000000000000
+
+# creating a class for button
+class Button:
+    
+    # constructor
+    def __init__(self, colour, x, y, width, height):
+        self.colour = colour
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+
+    # rectangular button with specs
+    def create(self, screen):
+        pygame.draw.rect(screen, self.colour, [self.x, self.y, self.width, self.height])
+
 
