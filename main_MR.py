@@ -169,7 +169,7 @@ while running:
             elif level == 2 and Start==[]:
                 if point_inside_game(x,y):
                     Start = (x,y)
-                    pygame.draw.circle(screen, RED, (x,y), 5)
+                    pygame.draw.circle(screen, RED, (x,y), 7)
             
             # make the destination point
             elif level ==3:
