@@ -20,10 +20,10 @@ colour_custom_1 = (10,145,80)  # creating a custom color
 # setting game parameters
 screen = pygame.display.set_mode([500,500]) # gives a surface
 gameX = 20
-gameY = 40
+gameY = 90
 gameWidth = 440  # window width
 gameHeight = 400  # window height
-gameBorder = 3    # window border width
+gameBorder = 10    # window border width
 
 # screen background setting
 screen.fill(WHITE)
@@ -82,24 +82,16 @@ def clickText():
     font = pygame.font.Font('arial.ttf', 12)
     text = font.render('CLICK HERE', True, WHITE)
     textRect = text.get_rect()
-    textRect.center = (75, 495)
+    textRect.center = (300, 30)
     screen.blit(text, textRect)
 
-# for the game description text
-def desText(s, x=315, y=485):
-    pygame.draw.rect(screen, WHITE, (125, 470, 500, 30))
-    font = pygame.font.SysFont('segoeuisemilight', 15)
-    text = font.render('%s'%(s), True, BLACK )
-    textRect = text.get_rect()
-    textRect.center = (x,y)
-    screen.blit(source= text, dest= textRect)
 
 running = True
 
 # Button for game
 pygame.draw.rect(screen, BLACK, (gameX, gameY, gameWidth, gameHeight), width=gameBorder)
 
-B1 = Button(BLACK, 25, 470, 100, 50)
+B1 = Button(BLACK, 200, 5, 200, 50)
 B1.create(screen)
 
 OBS = dict() # creating instance
@@ -121,8 +113,6 @@ parent = dict()
 level = 1
 
 clickText()
-desText("Instruction: ", y=460)
-desText("Draw the Obstacles, then CLICK BLACK Button")
 
 # looping for running
 while running:
@@ -152,19 +142,15 @@ while running:
                 """    
                 if level ==1 and Start == []:
                     level +=1
-                    B1.colour = RED # button in red color
-                    desText(" Draw the starting point, then CLICK RED button")
+                    
 
                 elif level ==2 and Start:
                     level +=1
-                    B1.colour = GREEN # button in green color
-                    desText(" Draw the Destination point, then CLICK GREEN button")
+                   
                 
                 elif level ==3 and End!=set():
                     level +=1
-                    B1.color = BLUE # button in blue color
-                    desText("Path is going to be explored using RRT Algorithm")
-
+                    
 
                 B1.create(screen)
                 clickText()
@@ -186,7 +172,7 @@ while running:
             elif level ==3:
                 if point_inside_game(x,y):
                     End.add((x,y))
-                    pygame.draw.circle(screen, GREEN, (x,y), 10)
+                    pygame.draw.circle(screen, BLUE, (x,y), 10)
 
         # if level is more than 3, stop asking for inputs    
         if level >=4:
@@ -228,14 +214,14 @@ while running:
             parent[(x_cur, y_cur)] = (x_m, y_m)
 
             # tracing the path
-            if screen.get_at((x_cur, y_cur)) == (0, 255, 0, 255):
+            if screen.get_at((x_cur, y_cur)) == (0, 0, 255, 255):
                 Trace = (x_cur, y_cur)
 
                 # kill the running
                 running = False
 
             # draw the other possible routes
-            pygame.draw.line(screen, BLUE, (x_cur, y_cur), (x_m, y_m), 2)
+            pygame.draw.line(screen, GREEN, (x_cur, y_cur), (x_m, y_m), 2)
 
     # update the display
     pygame.display.update()
@@ -253,10 +239,10 @@ while (Trace and running):
     # loop to keep the screen on until player restarts the game
     while Trace!=Start:
         x,y = parent[Trace]
-        pygame.draw.line(screen, GREEN, (x,y), Trace, 2)
+        pygame.draw.line(screen, BLUE, (x,y), Trace, 2)
         Trace = (x,y)
 
-    desText("Green coloured path is the optimised path")
+   
     pygame.display.update()
 
 
