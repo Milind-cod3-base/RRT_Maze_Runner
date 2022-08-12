@@ -60,3 +60,16 @@ def random_point():
     y_random = randint(gameY + gameBorder, gameY + gameHeight - gameBorder - 1)
 
     return (x_random, y_random)
+
+# get the point inside the rectangle and return boolean False
+def point_inside_rec(xr, yr, wr, hr, x, y):
+
+    # checking x bounds
+    if x > xr and x < xr + wr:
+
+        # checking y bounds
+        if y > yr and y < yr + hr:
+            return(True)
+
+    return(False)
+
