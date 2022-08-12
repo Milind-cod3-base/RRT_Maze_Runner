@@ -24,8 +24,6 @@ gameBorder = 3    # window border width
 # screen background setting
 screen.fill(WHITE)
 
-INT_MAX = 100000000000000
-
 # creating a class for button
 class Button:
     
@@ -97,3 +95,29 @@ def desText(s, x=315, y=485):
     textRect = text.get_rect()
     textRect.center = (x,y)
     screen.blit(source= text, dest= textRect)
+
+running = True
+
+# Button for game
+pygame.draw.rect(screen, BLACK, (gameX, gameY, gameWidth, gameHeight), width=gameBorder)
+
+B1 = Button(BLACK, 25, 470, 100, 50)
+B1.create(screen)
+
+OBS = dict() # creating instance
+
+# number of forward steps towards random sampled point
+Step = 10
+
+
+# Start stores Starting Point (single point in RED)
+Start = []
+
+# End variable stores a set of Destination points (GREEN)
+# Multiple points allowed to make the point appear bigger, and fast discovery
+# due to huge number of pixels in this game
+End = set() 
+
+# parent for storing graph
+parent = dict()
+level = 1
