@@ -42,3 +42,15 @@ class Button:
         pygame.draw.rect(screen, self.colour, [self.x, self.y, self.width, self.height])
 
 
+# in order to point inside the display
+def point_inside_game(x, y):
+    
+    # checking if inside the x bounds
+    if x > gameX + gameBorder and x < gameX + gameWidth - gameBorder:
+
+        # checking if inside the y bounds
+        if y > gameY + gameBorder and y < gameY + gameHeight - gameBorder:
+            return(True)
+
+    return (False)
+
