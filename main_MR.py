@@ -121,3 +121,7 @@ End = set()
 # parent for storing graph
 parent = dict()
 level = 1
+
+clickText()
+desText("Instruction: ", y=460)
+desText("Draw the Obstacles, then CLICK BLACK Button")
