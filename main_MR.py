@@ -73,3 +73,10 @@ def point_inside_rec(xr, yr, wr, hr, x, y):
 
     return(False)
 
+# using Euclidean distance formula to get point to point distance
+def p2p_dist(p1,p2):
+
+    x1,y1 = p1 # getting x and y coordinates
+    x2,y2 = p2
+    
+    return( ( (x1 - x2)**2 + (y1 - y2)**2 )**0.5 )
