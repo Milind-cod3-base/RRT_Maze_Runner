@@ -88,3 +88,12 @@ def clickText():
     textRect = text.get_rect()
     textRect.center = (75, 495)
     screen.blit(text, textRect)
+
+# for the game description text
+def desText(s, x=315, y=485):
+    pygame.draw.rect(screen, WHITE, (125, 470, 500, 30))
+    font = pygame.font.SysFont('segoeuisemilight', 15)
+    text = font.render(text='%s'%(s), antialias= True, color= BLACK )
+    textRect = text.get_rect()
+    textRect.center = (x,y)
+    screen.blit(source= text, dest= textRect)
