@@ -125,3 +125,37 @@ level = 1
 clickText()
 desText("Instruction: ", y=460)
 desText("Draw the Obstacles, then CLICK BLACK Button")
+
+# looping for running
+while running:
+    for event in pygame.event.get():
+
+        # to quit the game
+        if event.type == pygame.QUIT:
+            running = False
+            break
+
+        # if game is not running
+        if running == False:
+            break
+
+        # taking input from the mouse
+        m = pygame.mouse.get_pressed()
+        # storing the mouse coordinates
+        x,y = pygame.mouse.get_pos()
+
+        if m[0]==1:
+            if point_inside_rec(B1.x, B1.y, B1.width, B1.height, x, y):
+                if level ==1 and Start == []:
+                    level +=1
+                    B1.colour = RED
+                    desText(" Draw the starting point, then CLICK RED button")
+
+                elif level ==2 and Start:
+                    level +=1
+                    B1.colour = GREEN
+                    desText(" Draw the Destination point, then CLICK GREEN button")
+                
+                B1.create(screen)
+                clickText()
+                continue
