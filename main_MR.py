@@ -6,6 +6,7 @@ from random import randint
 
 import RRT_algo
 
+
 pygame.init()   # Initialize all imported pygame modules
 
 # setting colors
@@ -149,16 +150,28 @@ while running:
 
         if m[0]==1:
             if point_inside_rec(B1.x, B1.y, B1.width, B1.height, x, y):
+
+                """
+                 
+                 Changing button color and description at each level
+
+                """    
                 if level ==1 and Start == []:
                     level +=1
-                    B1.colour = RED
+                    B1.colour = RED # button in red color
                     desText(" Draw the starting point, then CLICK RED button")
 
                 elif level ==2 and Start:
                     level +=1
-                    B1.colour = GREEN
+                    B1.colour = GREEN # button in green color
                     desText(" Draw the Destination point, then CLICK GREEN button")
                 
+                elif level ==3 and End!=set():
+                    level +=1
+                    B1.color = BLUE # button in blue color
+                    desText("Path is going to be explored using RRT Algorithm")
+
+
                 B1.create(screen)
                 clickText()
                 continue
