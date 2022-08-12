@@ -239,7 +239,7 @@ while (Trace and running):
     # loop to keep the screen on until player restarts the game
     while Trace!=Start:
         x,y = parent[Trace]
-        pygame.draw.line(screen, BLUE, (x,y), Trace, 2)
+        pygame.draw.line(screen, BLUE, (x,y), Trace, 5)
         Trace = (x,y)
 
    
