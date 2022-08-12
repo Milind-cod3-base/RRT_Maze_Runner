@@ -233,3 +233,25 @@ while running:
     # update the display
     pygame.display.update()
 
+running = True
+
+# This loop gets the route back to start point
+while (Trace and running):
+    
+    # checking for quit command
+    if event.type == pygame.QUIT:
+        running = False
+        break
+    
+    # loop to keep the screen on until player restarts the game
+    while Trace!=Start:
+        x,y = parent[Trace]
+        pygame.draw.line(screen, GREEN, (x,y), Trace, 2)
+        Trace = (x,y)
+
+    desText("Green coloured path is the optimised path")
+    pygame.display.update()
+
+
+# Quit the game
+pygame.quit()
