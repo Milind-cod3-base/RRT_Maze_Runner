@@ -6,12 +6,21 @@ This module will be imported in main_MR.py
 """
 
 # importing main modules screen object
-from main_MR import p2p_dist, screen, Step
+from pygame import display
 
 
 # setting parameter
 INT_MAX = 100000000000000
+screen = display.set_mode([500,500]) # gives a surface
+Step = 10
 
+# using Euclidean distance formula to get point to point distance
+def p2p_dist(p1,p2):
+
+    x1,y1 = p1 # getting x and y coordinates
+    x2,y2 = p2
+    
+    return( ( (x1 - x2)**2 + (y1 - y2)**2 )**0.5 )
 
 def rrt(x, y, parent):   # function to contain RRT algo
     if (x,y) not in parent and screen.get_at((x,y)) != (0,0,0,255):
