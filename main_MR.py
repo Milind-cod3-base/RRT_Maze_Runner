@@ -159,3 +159,32 @@ while running:
                 B1.create(screen)
                 clickText()
                 continue
+
+            # make the maze
+            elif level ==1:
+                if point_inside_game(x,y):
+                    OBS[(x,y)] =1 
+                    pygame.draw.circle( screen,  RED, (x,y), 10)
+            
+            # make the starting point
+            elif level == 2 and Start==[]:
+                if point_inside_game(x,y):
+                    Start = (x,y)
+                    pygame.draw.circle(screen, RED, (x,y), 5)
+            
+            # make the destination point
+            elif level ==3:
+                if point_inside_game(x,y):
+                    End.add((x,y))
+                    pygame.draw.circle(screen, GREEN, (x,y), 10)
+
+        # if level is more than 3, stop asking for inputs    
+        if level >=4:
+            running = False
+            break
+    
+    # update the display
+    pygame.display.update()
+
+
+
