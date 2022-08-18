@@ -1,6 +1,6 @@
 # importing important libraries
 from trace import Trace
-import pygame 
+import pygame
 import time
 from random import randint
 
@@ -10,15 +10,15 @@ import RRT_algo
 pygame.init()   # Initialize all imported pygame modules
 
 # setting colors
-WHITE = (255,255,255)
-BLUE = (0,0,255)
-BLACK = (0,0,0)
-RED = (255,0,0)
-GREEN = (0,255,0)
-colour_custom_1 = (10,145,80)  # creating a custom color
+WHITE = (255, 255, 255)
+BLUE = (0, 0, 255)
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+colour_custom_1 = (10, 145, 80)  # creating a custom color
 
 # setting game parameters
-screen = pygame.display.set_mode([500,500]) # gives a surface
+screen = pygame.display.set_mode([500, 500])  # gives a surface
 gameX = 20
 gameY = 90
 gameWidth = 440  # window width
@@ -29,8 +29,10 @@ gameBorder = 10    # window border width
 screen.fill(WHITE)
 
 # creating a class for button
+
+
 class Button:
-    
+
     # constructor
     def __init__(self, colour, x, y, width, height):
         self.colour = colour
@@ -41,22 +43,26 @@ class Button:
 
     # rectangular button with specs
     def create(self, screen):
-        pygame.draw.rect(screen, self.colour, [self.x, self.y, self.width, self.height])
+        pygame.draw.rect(
+            screen, self.colour, [
+                self.x, self.y, self.width, self.height])
 
 
 # in order to point inside the display
 def point_inside_game(x, y):
-    
+
     # checking if inside the x bounds
     if x > gameX + gameBorder and x < gameX + gameWidth - gameBorder:
 
         # checking if inside the y bounds
         if y > gameY + gameBorder and y < gameY + gameHeight - gameBorder:
-            return(True)
+            return (True)
 
     return (False)
 
 # to generate and return random point coordinates in (x,y)
+
+
 def random_point():
     x_random = randint(gameX + gameBorder, gameX + gameWidth - gameBorder - 1)
     y_random = randint(gameY + gameBorder, gameY + gameHeight - gameBorder - 1)
@@ -64,6 +70,8 @@ def random_point():
     return (x_random, y_random)
 
 # get the point inside the rectangle and return boolean False
+
+
 def point_inside_rec(xr, yr, wr, hr, x, y):
 
     # checking x bounds
@@ -71,9 +79,10 @@ def point_inside_rec(xr, yr, wr, hr, x, y):
 
         # checking y bounds
         if y > yr and y < yr + hr:
-            return(True)
+            return (True)
 
-    return(False)
+    return (False)
+
 
 # variable to hold the text on the button
 button_txt = 'MARK THE START POINT'
@@ -91,12 +100,19 @@ def clickText():
 running = True
 
 # Button for game
-pygame.draw.rect(screen, BLACK, (gameX, gameY, gameWidth, gameHeight), width=gameBorder)
+pygame.draw.rect(
+    screen,
+    BLACK,
+    (gameX,
+     gameY,
+     gameWidth,
+     gameHeight),
+    width=gameBorder)
 
 B1 = Button(BLACK, 200, 5, 200, 50)
 B1.create(screen)
 
-OBS = dict() # creating instance
+OBS = dict()  # creating instance
 
 # number of forward steps towards random sampled point
 Step = 10
@@ -108,7 +124,7 @@ Start = []
 # End variable stores a set of Destination points (GREEN)
 # Multiple points allowed to make the point appear bigger, and fast discovery
 # due to huge number of pixels in this game
-End = set() 
+End = set()
 
 # parent for storing graph
 parent = dict()
@@ -126,33 +142,32 @@ while running:
             break
 
         # if game is not running
-        if running == False:
+        if not running:
             break
 
         # taking input from the mouse
         m = pygame.mouse.get_pressed()
         # storing the mouse coordinates
-        x,y = pygame.mouse.get_pos()
+        x, y = pygame.mouse.get_pos()
 
-        if m[0]==1:
+        if m[0] == 1:
             if point_inside_rec(B1.x, B1.y, B1.width, B1.height, x, y):
 
                 """
-                 
+
                  Changing button color and description at each level
 
-                """    
-                if level ==1 and Start == []:
-                    level +=1
+                """
+                if level == 1 and Start == []:
+                    level += 1
                     button_txt = 'MARK THE END POINT'
 
-                elif level ==2 and Start:
-                    level +=1
+                elif level == 2 and Start:
+                    level += 1
                     button_txt = 'FIND THE PATH'
-                   
-                
-                elif level ==3 and End!=set():
-                    level +=1
+
+                elif level == 3 and End != set():
+                    level += 1
                     button_txt = 'PATH FOUND'
 
                 B1.create(screen)
@@ -160,28 +175,28 @@ while running:
                 continue
 
             # make the maze
-            elif level ==1:
-                if point_inside_game(x,y):
-                    OBS[(x,y)] =1 
-                    pygame.draw.circle( screen,  BLACK, (x,y), 10)
-            
-            # make the starting point
-            elif level == 2 and Start==[]:
-                if point_inside_game(x,y):
-                    Start = (x,y)
-                    pygame.draw.circle(screen, RED, (x,y), 7)
-            
-            # make the destination point
-            elif level ==3:
-                if point_inside_game(x,y):
-                    End.add((x,y))
-                    pygame.draw.circle(screen, BLUE, (x,y), 10)
+            elif level == 1:
+                if point_inside_game(x, y):
+                    OBS[(x, y)] = 1
+                    pygame.draw.circle(screen, BLACK, (x, y), 10)
 
-        # if level is more than 3, stop asking for inputs    
-        if level >=4:
+            # make the starting point
+            elif level == 2 and Start == []:
+                if point_inside_game(x, y):
+                    Start = (x, y)
+                    pygame.draw.circle(screen, RED, (x, y), 7)
+
+            # make the destination point
+            elif level == 3:
+                if point_inside_game(x, y):
+                    End.add((x, y))
+                    pygame.draw.circle(screen, BLUE, (x, y), 10)
+
+        # if level is more than 3, stop asking for inputs
+        if level >= 4:
             running = False
             break
-    
+
     # update the display
     pygame.display.update()
 
@@ -199,21 +214,23 @@ while running:
             break
 
     # gettin the cordinates of the random points
-    x,y = random_point() 
-    
+    x, y = random_point()
+
     if (time.time() - Timer) > 5:
         Step = 5
-    
-    # calling module RRT_algo
-    good, x_m, y_m, ans= RRT_algo.rrt(x,y,parent)
 
+    # calling module RRT_algo
+    good, x_m, y_m, ans = RRT_algo.rrt(x, y, parent)
 
     if good and ans:
         x_cur = ans[0]
         y_cur = ans[1]
 
         # 255 value of alpha is fully opaque
-        if screen.get_at((x_cur, y_cur)) != (0, 0, 0, 255 ) and (x_cur, y_cur) not in parent:
+        if screen.get_at(
+            (x_cur, y_cur)) != (
+            0, 0, 0, 255) and (
+                x_cur, y_cur) not in parent:
             parent[(x_cur, y_cur)] = (x_m, y_m)
 
             # tracing the path
@@ -233,19 +250,18 @@ running = True
 
 # This loop gets the route back to start point
 while (Trace and running):
-    
+
     # checking for quit command
     if event.type == pygame.QUIT:
         running = False
         break
-    
-    # loop to keep the screen on until player restarts the game
-    while Trace!=Start:
-        x,y = parent[Trace]
-        pygame.draw.line(screen, BLUE, (x,y), Trace, 5)
-        Trace = (x,y)
 
-   
+    # loop to keep the screen on until player restarts the game
+    while Trace != Start:
+        x, y = parent[Trace]
+        pygame.draw.line(screen, BLUE, (x, y), Trace, 5)
+        Trace = (x, y)
+
     pygame.display.update()
 
 
